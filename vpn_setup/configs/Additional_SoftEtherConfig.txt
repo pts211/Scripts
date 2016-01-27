@@ -1,0 +1,23 @@
+ServerPasswordSet Password1
+
+OpenVpnEnable no /PORTS:1194
+SstpEnable no
+
+HubDelete DEFAULT
+HubDelete AutoVPN
+
+HubCreate AutoVPN /PASSWORD:admin
+Hub AutoVPN
+
+SecureNatEnable
+SecureNatHostSet /MAC:NONE /IP:192.19.87.1 /MASK:255.255.255.0
+DhcpSet /START:192.19.87.10 /END:192.19.87.200 /MASK:255.255.255.0 /EXPIRE:7200 /GW:192.19.87.1 /DNS:208.67.222.222 /DNS2:208.67.220.220 /DOMAIN:none /LOG:yes
+
+IPsecEnable /L2TP:yes /L2TPRAW:no /ETHERIP:no /PSK:DEFAULTSECRET /DEFAULTHUB:AutoVPN
+
+GroupCreate Guests /REALNAME:none /NOTE:"For users who are restricted from accessing local network resources."
+
+UserCreate Dummy /GROUP:Guests /REALNAME:none /NOTE:"The main VPN user."
+UserPasswordSet Dummy /PASSWORD:Password1
+
+AccessAdd discard /MEMO:block_local /Priority:100 /SRCUSERNAME:Guests /DESTUSERNAME:none /SRCMAC:none /DESTMAC:none /SRCIP:0.0.0.0/0 /DESTIP:192.168.0.0/16 /PROTOCOL:0 /SRCPORT:none /DESTPORT:none /TCPSTATE:none
