@@ -5,9 +5,9 @@ This is a set of scripts that I wrote to auto-configure a SoftEther based VPN se
 
 - chmod +x vpn_setup_script.sh
 - Run with the following options
--  --install: performs the full install. Downloads, extracts, installs, and configures a basic SoftEtherVPN.
--  --uninstall: uninstalls the SoftEtherVPN.
--  --clean: Deletes the "wrkdir" and "logs" direcotries.
+  - --install: performs the full install. Downloads, extracts, installs, and configures a basic SoftEtherVPN.
+  - --uninstall: uninstalls the SoftEtherVPN.
+  - --clean: Deletes the "wrkdir" and "logs" direcotries.
 
 ## Notes
 Passwords and shared secret's have been removed. Be sure to configure them before running.
