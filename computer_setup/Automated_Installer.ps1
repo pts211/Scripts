@@ -19,7 +19,7 @@ IF(!(Test-Path $registryPath)) {
 #New-Item c:\new_file.txt -type file
 
 net use * /delete /y
-net use X: \\STORAGE\setups /user:user1 user1 /persistent:yes
+net use S: \\STORAGE\setups /user:user1 user1 /persistent:no
 
 #Install chocolatey
 iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
@@ -34,14 +34,27 @@ choco install autodesk-fusion360 -y
 
 
 $pinfo = New-Object System.Diagnostics.ProcessStartInfo
-$pinfo.FileName = "C:\Autodesk_Inventor_2016\Img\Setup.exe"
+$pinfo.FileName = "S:\Software\Autodesk_Deploy\Autodesk_Inventor_2016\Img\Setup.exe"
 $pinfo.RedirectStandardError = $true
 $pinfo.RedirectStandardOutput = $true
 $pinfo.UseShellExecute = $false
-$pinfo.Arguments = "/W /qb /I C:\Autodesk_Inventor_2016\Img\Inventor 2016.ini /language en-us"
+$pinfo.Arguments = "/W /qb /I S:\Software\Autodesk_Deploy\Autodesk_Inventor_2016\Img\Inventor 2016.ini /language en-us"
 $p = New-Object System.Diagnostics.Process
 $p.StartInfo = $pinfo
 $p.Start() | Out-Null
 #Do Other Stuff Here....
 $p.WaitForExit()
 $p.ExitCode
+
+$pinfo2 = New-Object System.Diagnostics.ProcessStartInfo
+$pinfo2.FileName = "S:\Software\Autodesk_Deploy\Autodesk_HSM_2016\Img\Setup.exe"
+$pinfo2.RedirectStandardError = $true
+$pinfo2.RedirectStandardOutput = $true
+$pinfo2.UseShellExecute = $false
+$pinfo2.Arguments = "/W /qb /I S:\Software\Autodesk_Deploy\Autodesk_HSM_2016\Img\Autodesk_HSM_2016.ini /language en-us"
+$p2 = New-Object System.Diagnostics.Process
+$p2.StartInfo = $pinfo
+$p2.Start() | Out-Null
+#Do Other Stuff Here....
+$p2.WaitForExit()
+$p2.ExitCode
