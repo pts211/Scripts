@@ -39,12 +39,22 @@ IF( !(Test-Path C:\Wallpapers) )
     Copy-Item $from $to -recurse
 }
 
-$files = Get-ChildItem "S:\Drivers\*.msi"
-foreach ($file in $files) 
+$msi_files = Get-ChildItem "S:\Drivers\*.msi"
+foreach ($msi in $msi_files) 
 {
-    Write-Output $file
-    Start-Process -FilePath msiexec.exe -ArgumentList "/i $file /quiet /norestart" -wait
+    Write-Output $msi
+    Start-Process -FilePath msiexec.exe -ArgumentList "/i $msi /quiet /norestart" -wait
 }
+
+#In order to run the setup off of a network drive, might need to look at this:
+# HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap\UncAsIntranet
+
+#Get the connected video cards. Can use as a start to extend this to check for Quadro or GeForce.
+#get-wmiobject -class CIM_VideoController -namespace root/cimv2
+$vidinstall = "S:\Drivers\Quadro\setup.exe"
+$arguments = "-s -i -noreboot -noeula"
+Start-Process $vidinstall $arguments -Wait
+#Start-Process "" -Wait
 
 #Start-Process "S:\Drivers\printer_driver.exe" -NoNewWindow -Wait
 
