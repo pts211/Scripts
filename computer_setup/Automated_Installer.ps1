@@ -18,6 +18,12 @@ function RunProcess($file, $arguments) {
     return $p.ExitCode
 }
 
+Write-Output "Installing Securly Certificate..."
+$file = "S:\Drivers\Securly SSL Windows.exe"
+$arguments = ""
+RunProcess $file $arguments
+Write-Output "Installing Securly Certificate... DONE"
+
 Write-Output "Changing registery values..."
 Write-Output "...Linked Connections..."
 #Enable mapping drives to both Admin and user account (Requires restart).
@@ -53,15 +59,17 @@ Write-Output "Mounting server share... DONE"
 
 Write-Output "Installing Chocolatey packages..."
 #Install chocolatey
-#iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
+<#
+iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 
-#choco install googlechrome -y
-#choco install 7zip.install -y
-#choco install notepadplusplus -y
-#choco install adobereader -y
-#choco install setpoint -y
-#choco install officeproplus2013 -y
-#choco install autodesk-fusion360 -y
+choco install googlechrome -y
+choco install 7zip.install -y
+choco install notepadplusplus -y
+choco install adobereader -y
+choco install setpoint -y
+choco install officeproplus2013 -y
+choco install autodesk-fusion360 -y
+#>
 Write-Output "Installing Chocolatey packages... DONE"
 
 Write-Output "Copying Wallpapers..."
