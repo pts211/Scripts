@@ -22,15 +22,31 @@ net use * /delete /y
 net use S: \\STORAGE\setups /user:user1 user1 /persistent:no
 
 #Install chocolatey
-iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
+#iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 
-choco install googlechrome -y
-choco install 7zip.install -y
-choco install adobereader -y
-choco install setpoint -y
-choco install officeproplus2013 -y
-choco install autodesk-fusion360 -y
+#choco install googlechrome -y
+#choco install 7zip.install -y
+#choco install notepadplusplus -y
+#choco install adobereader -y
+#choco install setpoint -y
+#choco install officeproplus2013 -y
+#choco install autodesk-fusion360 -y
 
+IF( !(Test-Path C:\Wallpapers) )
+{
+    $from = "S:\Wallpapers\*" 
+    $to = "C:\Wallpapers"  
+    Copy-Item $from $to -recurse
+}
+
+$files = Get-ChildItem "S:\Drivers\*.msi"
+foreach ($file in $files) 
+{
+    Write-Output $file
+    Start-Process -FilePath msiexec.exe -ArgumentList "/i $file /quiet /norestart" -wait
+}
+
+#Start-Process "S:\Drivers\printer_driver.exe" -NoNewWindow -Wait
 
 
 $pinfo = New-Object System.Diagnostics.ProcessStartInfo
