@@ -17,13 +17,6 @@ function RunProcess($file, $arguments) {
     $p.WaitForExit()
     return $p.ExitCode
 }
-
-Write-Output "Installing Securly Certificate..."
-$file = "S:\Drivers\Securly SSL Windows.exe"
-$arguments = ""
-RunProcess $file $arguments
-Write-Output "Installing Securly Certificate... DONE"
-
 <#
 Write-Output "Changing registery values..."
 Write-Output "...Linked Connections..."
@@ -58,6 +51,13 @@ Write-Output "Mounting server share..."
 net use * /delete /y
 net use S: \\STORAGE\setups /user:user1 user1 /persistent:no
 Write-Output "Mounting server share... DONE"
+
+Write-Output "Installing Securly Certificate..."
+$file = "S:\Drivers\Securly SSL Windows.exe"
+$arguments = ""
+RunProcess $file $arguments
+Write-Output "Installing Securly Certificate... DONE"
+
 
 Write-Output "Installing Chocolatey packages..."
 #Install chocolatey
