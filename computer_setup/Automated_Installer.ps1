@@ -24,6 +24,7 @@ $arguments = ""
 RunProcess $file $arguments
 Write-Output "Installing Securly Certificate... DONE"
 
+<#
 Write-Output "Changing registery values..."
 Write-Output "...Linked Connections..."
 #Enable mapping drives to both Admin and user account (Requires restart).
@@ -36,7 +37,8 @@ IF(!(Test-Path $registryPath)) {
 } ELSE {
     New-ItemProperty -Path $registryPath -Name $name -Value $value -PropertyType DWORD -Force | Out-Null
 }
-
+#>
+<#
 Write-Output "...UNC As Intranet..."
 #Allow UNC execution.
 $registryPath2 = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap"
@@ -49,7 +51,7 @@ IF(!(Test-Path $registryPath2)) {
     New-ItemProperty -Path $registryPath2 -Name $name2 -Value $value2 -PropertyType DWORD -Force | Out-Null
 }
 Write-Output "Changing registery values... DONE"
-
+#>
 #Restart-Computer -Wait
 #New-Item c:\new_file.txt -type file
 Write-Output "Mounting server share..."
@@ -59,7 +61,7 @@ Write-Output "Mounting server share... DONE"
 
 Write-Output "Installing Chocolatey packages..."
 #Install chocolatey
-<#
+
 iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 
 choco install googlechrome -y
@@ -67,9 +69,9 @@ choco install 7zip.install -y
 choco install notepadplusplus -y
 choco install adobereader -y
 choco install setpoint -y
-choco install officeproplus2013 -y
-choco install autodesk-fusion360 -y
-#>
+#choco install officeproplus2013 -y
+#choco install autodesk-fusion360 -y
+
 Write-Output "Installing Chocolatey packages... DONE"
 
 Write-Output "Copying Wallpapers..."
@@ -92,7 +94,7 @@ Write-Output "Installing MSI Drivers... DONE"
 
 #In order to run the setup off of a network drive, might need to look at this:
 # HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap\UncAsIntranet
-
+<#
 Write-Output "Installing Quadro Driver..."
 #Get the connected video cards. Can use as a start to extend this to check for Quadro or GeForce.
 #get-wmiobject -class CIM_VideoController -namespace root/cimv2
@@ -116,3 +118,4 @@ $file = "S:\Software\Autodesk_Deploy\Autodesk_HSM_2016\Img\Setup.exe"
 $arguments = "/W /qb /I S:\Software\Autodesk_Deploy\Autodesk_HSM_2016\Img\Autodesk_HSM_2016.ini /language en-us"
 RunProcess $file $arguments
 Write-Output "Installing Autodesk Inventor HSM... DONE"
+#>
