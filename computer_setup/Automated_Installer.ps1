@@ -94,7 +94,7 @@ Write-Output "Installing MSI Drivers... DONE"
 
 #In order to run the setup off of a network drive, might need to look at this:
 # HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap\UncAsIntranet
-<#
+
 Write-Output "Installing Quadro Driver..."
 #Get the connected video cards. Can use as a start to extend this to check for Quadro or GeForce.
 #get-wmiobject -class CIM_VideoController -namespace root/cimv2
@@ -112,10 +112,9 @@ $arguments = "/W /qb /I S:\Software\Autodesk_Deploy\Autodesk_Inventor_2016\Img\I
 RunProcess $file $arguments
 Write-Output "Installing Autodesk Inventor... DONE"
 
-
 Write-Output "Installing Autodesk Inventor HSM..."
 $file = "S:\Software\Autodesk_Deploy\Autodesk_HSM_2016\Img\Setup.exe"
 $arguments = "/W /qb /I S:\Software\Autodesk_Deploy\Autodesk_HSM_2016\Img\Autodesk_HSM_2016.ini /language en-us"
 RunProcess $file $arguments
 Write-Output "Installing Autodesk Inventor HSM... DONE"
-#>
+
