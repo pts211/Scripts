@@ -69,8 +69,9 @@ choco install 7zip.install -y
 choco install notepadplusplus -y
 choco install adobereader -y
 choco install setpoint -y
+#Can't use this office install as it is the retail version... Need volume licensed version.
 #choco install officeproplus2013 -y
-#choco install autodesk-fusion360 -y
+choco install autodesk-fusion360 -y
 
 Write-Output "Installing Chocolatey packages... DONE"
 
